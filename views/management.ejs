@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <title>Future Inc</title>
+  <meta charset="utf-8">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/management.css">
+    <link rel="stylesheet" href="css/common.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+              <img alt="Brand" src="images/logo.png">
+            </a>
+          </div>
+            <ul class="nav nav-pills text-center">
+              <li class="active"><a href="#">Home</a></li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Products <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="pages/mobile-dev.html">Mobile</a></li>
+                  <li><a href="pages/big-data.html">Big Data</a></li>
+                  <li><a href="pages/ioe-iot.html">IOE/IOT</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">About Us <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="pages/management.html">Management</a></li>
+                  <li><a href="pages/code-of-conduct.html">Code of conduct</a></li>
+                  <li><a href="pages/business-process.html">Business Process</a></li>
+                  <li><a href="pages/locations.html">Locations</a></li>
+                  <li><a href="pages/contct.html">Contacts</a></li>
+                </ul>
+              </li>
+            </ul>
+        </div>
+      </nav>
+    </header>
+    <h1>Management </h1>
+    <h3> Description about the team and other important facts.</h3>
+    <div id="w">
+    <div id="content">
+      <div class="thumbs">
+        <ul class="clearfix">
+          <li><a href="" target="_blank"><img src="images/employeeIcon.png" data-fullsize="images/employeeIcon.png" class="thumbimg" alt="CEO & founder name" data-date="Description"></a><meta class="desc" content="CEO & founder"></li>
+          <li><a href="" target="_blank"><img src="images/employeeIcon.png" data-fullsize="images/employeeIcon.png" class="thumbimg" alt="project Manger name" data-date="Description"></a><meta class="desc" content="Project Manger"></li>
+          <li><a href=""target="_blank"><img src="images/employeeIcon.png" data-fullsize="images/employeeIcon.png" class="thumbimg" alt="Project Lead name" data-date="Description"></a><meta class="desc" content="Project Lead"></li>
+        <li><a href=""target="_blank"><img src="images/employeeIcon.png" data-fullsize="images/employeeIcon.png" class="thumbimg" alt="Developer name" data-date="Description"></a><meta class="desc" content="Developer"></li>
+       <li><a href=""target="_blank"><img src="images/employeeIcon.png" data-fullsize="images/employeeIcon.png" class="thumbimg" alt="Production support Name" data-date="Description"></a><meta class="desc" content=" Production support"></li>
+       <li><a href=""target="_blank"><img src="images/employeeIcon.png" data-fullsize="images/employeeIcon.png" class="thumbimg" alt="Quality tester name" data-date="Description"></a><meta class="desc" content=" Quality tester"></li>
+        </ul>
+      </div>
+      
+      <!-- setup details pane template -->
+       <div id="details-pane" style="display: none;">
+             <div class="big-img"><a href="" target="_blank"><img class="bigimg" src=""></a></div> 
+                    <div class="pull-left">
+                      <span class="testimonials-name"><h3 class="title"></h3></span>
+                      <span class="testimonials-post"><p class="desc"></span>
+                    </div>
+                  </div>
+      </div><!-- @end #details-pane
+    </div><!-- @end #content -->
+  </div><!-- @end #w -->
+  </div>
+  
+  <footer class="text-center">
+      &copy; All rights reserved.
+      <div>
+        <p>
+          News:
+        </p>
+      </div>
+    </footer>
+    
+<script type="text/javascript">
+$(function(){
+  $('.thumbs ul li img').on('mouseover', function(e){
+    var dpane      = $('#details-pane');
+    var dpanetitle = $('#details-pane .title');
+    var dpanedesc  = $('#details-pane .desc');
+    var newtitle   = $(this).attr('alt');
+    var newdate    = $(this).attr('data-date');
+    var newdesc    = $(this).parent().next('meta.desc').attr('content');
+    var newimg     = $(this).attr('data-fullsize');
+    var linkurl    = $(this).parent().attr('href');
+    
+    var position = $(this).offset();
+    var imgwidth = $(this).width();
+    var ycoord   = position.top;
+    if(position.left / $(window).width() >= 0.5) {
+      var xcoord = position.left - 530;
+      // details pane is 530px fixed width
+      // if the img position is beyond 50% of the page, we move the pane to the left side
+    } else {
+      var xcoord = position.left + imgwidth;
+    }
+
+    $('.big-img a').attr('href',linkurl);
+    $('.big-img a img').attr('src',newimg);
+    
+    var titlehtml = newtitle + '<span>('+newdate+')</span>';
+    
+    dpanetitle.html(titlehtml);
+    dpanedesc.html(newdesc);
+    dpane.css({ 'left': xcoord, 'top': ycoord, 'display': 'block'});
+    
+  }).on('mouseout', function(e){
+    $('#details-pane').css('display','none');
+  });
+  
+  // when hovering the details pane keep displayed, otherwise hide
+  $('#details-pane').on('mouseover', function(e){
+    $(this).css('display','block');
+  });
+  $('#details-pane').on('mouseout', function(e){
+    //this is the original element the event handler was assigned to
+    var e = e.toElement || e.relatedTarget;
+    if (e.parentNode == this || e.parentNode.parentNode == this || e.parentNode.parentNode.parentNode == this || e == this || e.nodeName == 'IMG') {
+      return;
+    }
+    $(this).css('display','none');
+    //console.log(e.nodeName)
+  });
+});
+</script>
+    
+    
+    
+  </body>
+</html>

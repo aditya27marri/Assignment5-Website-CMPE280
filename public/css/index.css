@@ -1,0 +1,9 @@
+.col-md-4{padding: 0px !important;}
+.row{margin: 0px !important;height: 30%}
+#myCarousel{height: 70%}
+.carousel-inner{height: 100%;}
+.item{height: 100%;}
+.row{height: 30%;}
+.col-md-4{height: 100%;}
+button a{color: #fff;}
+.carousel-caption h1{background-color: #222;opacity: 0.75}
